@@ -1,0 +1,260 @@
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doces da Giovana</title>
+    <link rel="shortcut icon" href="imagens/logo.jpeg" type="image/x-icon">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <header>
+
+        <div class="cabecalho-topo">
+
+            <input type="text" id="pesquisa" placeholder="Pesquisar doces...">
+
+            <h1>Doces da Giovana</h1>
+
+            <div class="icones-cabecalho">
+
+                <a href="#" title="Minha conta" onclick="abrirUsuario(event)">
+                    <img src="imagens/user-pen-alt-svgrepo-com.svg" alt="usuario">
+                </a>
+
+                <a href="#" title="Meu carrinho" onclick="abrirCarrinho(event)">
+                    <img src="imagens/shopping-cart-16-svgrepo-com.svg" alt="carrinho">
+                </a>
+
+            </div>
+
+        </div>
+
+        <nav>
+
+            <a href="index.html">Início</a>
+            <a href="novidades/">Novidades</a>
+            <a href="morangos/">Morangos</a>
+            <a href="brownies/">Brownies</a>
+            <a href="brigadeiros/">Brigadeiros</a>
+            <a href="bolos/">Bolos</a>
+            <a href="contatos/">Contatos</a>
+
+        </nav>
+
+    </header>
+
+
+    <!-- JANELA DE LOGIN E CADASTRO -->
+
+    <div class="modal-usuario" id="modalUsuario">
+
+        <div class="conteudo-usuario">
+
+            <button class="fechar" onclick="fecharUsuario()">×</button>
+
+            <h2>Bem-vindo!</h2>
+
+            <p>Entre na sua conta</p>
+
+            <form class="form-login">
+
+                <input type="email" placeholder="Seu e-mail" required>
+
+                <input type="password" placeholder="Sua senha" required>
+
+                <button type="submit">Entrar</button>
+
+            </form>
+
+            <p class="cadastro">
+                Ainda não tem uma conta?
+                <a href="#" onclick="abrirCadastro(event)">Cadastre-se</a>
+            </p>
+
+            <div class="form-cadastro" id="formCadastro">
+
+                <input type="text" placeholder="Seu nome completo">
+
+                <input type="email" placeholder="Seu e-mail">
+
+                <input type="password" placeholder="Crie uma senha">
+
+                <input type="password" placeholder="Confirme sua senha">
+
+                <button type="button">Criar conta</button>
+
+                <p class="voltar-login">
+                    Já possui uma conta?
+                    <a href="#" onclick="voltarLogin(event)">Entrar</a>
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- JANELA DO CARRINHO -->
+
+    <div class="modal-carrinho" id="modalCarrinho">
+
+        <div class="conteudo-carrinho">
+
+            <button class="fechar-carrinho" onclick="fecharCarrinho()">×</button>
+
+            <h2>Meu carrinho</h2>
+
+            <p>Seus doces escolhidos aparecerão aqui!</p>
+
+            <div class="lista-carrinho" id="listaCarrinho">
+
+                <p class="carrinho-vazio">Seu carrinho está vazio.</p>
+
+            </div>
+
+            <div class="resumo-carrinho">
+
+                <p>
+                    Subtotal:
+                    <span id="subtotal">R$ 0,00</span>
+                </p>
+
+                <p>
+                    Total:
+                    <strong id="total">R$ 0,00</strong>
+                </p>
+
+            </div>
+
+            <button class="finalizar-pedido" type="button">
+                Finalizar pedido
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <!-- CARROSSEL -->
+
+    <section class="carrossel">
+
+        <button class="seta anterior" onclick="mudarSlide(-1)">&#10094;</button>
+
+        <button class="seta proximo" onclick="mudarSlide(1)">&#10095;</button>
+
+        <div class="slide">
+
+            <a href="brigadeiros/">
+                <img src="imagens/carrossel de imagens/banner_brigadeiros.jpg" alt="Brigadeiros">
+            </a>
+
+        </div>
+
+        <div class="slide">
+
+            <a href="morangos/">
+                <img src="imagens/carrossel de imagens/banner_morangos_cravejados.jpg" alt="Morango Cravejado">
+            </a>
+
+        </div>
+
+        <div class="slide">
+
+            <a href="brownies/">
+                <img src="imagens/carrossel de imagens/banner_brownies.jpg" alt="Brownie">
+            </a>
+
+        </div>
+
+        <div class="slide">
+
+            <a href="bolos/">
+                <img src="imagens/carrossel de imagens/banner_bolo_cenoura.jpg" alt="Bolo de cenoura">
+            </a>
+
+        </div>
+
+    </section>
+
+
+    <!-- CONTEÚDO PRINCIPAL -->
+
+    <main>
+
+        <section class="contato" id="contato">
+
+            <h2>Entre em contato conosco</h2>
+
+            <p>
+                Será um prazer atender você!
+                Faça sua encomenda ou venha conhecer nossos doces.
+            </p>
+
+            <div class="contato-links">
+
+                <a href="https://wa.me/qr/7NE5S63ZMAVMK1?s=r" target="_blank">
+                    WhatsApp
+                </a>
+
+                <a href="https://www.instagram.com/doces_da_giovana?utm_source=qr" target="_blank">
+                    Instagram
+                </a>
+
+            </div>
+
+            <div class="endereco">
+
+                <h3>Venha nos visitar!</h3>
+
+                <p>Feira de Artesanato de Nova Viçosa – BA</p>
+
+                <a href="https://maps.app.goo.gl/7mhHEtPxoUPUsA2j6" target="_blank">
+                    Ver localização no mapa
+                </a>
+
+                <p>Endereço de retirada</p>
+
+                <a href="https://maps.app.goo.gl/HcMZFWwCBDRLge2k8?g_st=ic" target="_blank">
+                    Ver localização no mapa
+                </a>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- RODAPÉ -->
+
+    <footer>
+
+        <div class="informacoes">
+            <h3>Privacidade e informações</h3>
+        </div>
+
+        <div class="links-rodape">
+
+            <a href="#privacidade">Política de Privacidade</a>
+            <a href="#termos">Termos de Uso</a>
+            <a href="#contato">Contato</a>
+
+        </div>
+
+        <p class="direitos">
+            &copy; 2026 Doces da Giovana. Todos os direitos reservados.
+        </p>
+
+    </footer>
+
+
+    <script src="script.js"></script>
+
+</body>
+</html>
