@@ -8,9 +8,7 @@ let slideAtual = 0;
 
 function mostrarSlide() {
 
-    if (slides.length === 0) {
-        return;
-    }
+    if (slides.length === 0) return;
 
     for (let i = 0; i < slides.length; i++) {
         slides[i].style.display = "none";
@@ -23,7 +21,9 @@ mostrarSlide();
 
 function mudarSlide(direcao) {
 
-    slideAtual = slideAtual + direcao;
+    if (slides.length === 0) return;
+
+    slideAtual += direcao;
 
     if (slideAtual >= slides.length) {
         slideAtual = 0;
@@ -36,11 +36,11 @@ function mudarSlide(direcao) {
     mostrarSlide();
 }
 
-// Troca automática a cada 4 segundos
-
-setInterval(function() {
-    mudarSlide(1);
-}, 4000);
+if (slides.length > 0) {
+    setInterval(function() {
+        mudarSlide(1);
+    }, 4000);
+}
 
 
 /* ========================================
@@ -49,36 +49,44 @@ setInterval(function() {
 
 function abrirUsuario(event) {
 
-    event.preventDefault();
+    if (event) event.preventDefault();
 
-    document.getElementById("modalUsuario").style.display = "flex";
+    let modal = document.getElementById("modalUsuario");
+
+    if (modal) modal.style.display = "flex";
 }
 
 function fecharUsuario() {
 
-    document.getElementById("modalUsuario").style.display = "none";
+    let modal = document.getElementById("modalUsuario");
+
+    if (modal) modal.style.display = "none";
 }
 
 function abrirCadastro(event) {
 
-    event.preventDefault();
+    if (event) event.preventDefault();
 
-    document.querySelector(".form-login").style.display = "none";
+    let login = document.querySelector(".form-login");
+    let cadastro = document.querySelector(".cadastro");
+    let formulario = document.getElementById("formCadastro");
 
-    document.querySelector(".cadastro").style.display = "none";
-
-    document.getElementById("formCadastro").style.display = "flex";
+    if (login) login.style.display = "none";
+    if (cadastro) cadastro.style.display = "none";
+    if (formulario) formulario.style.display = "flex";
 }
 
 function voltarLogin(event) {
 
-    event.preventDefault();
+    if (event) event.preventDefault();
 
-    document.querySelector(".form-login").style.display = "flex";
+    let login = document.querySelector(".form-login");
+    let cadastro = document.querySelector(".cadastro");
+    let formulario = document.getElementById("formCadastro");
 
-    document.querySelector(".cadastro").style.display = "block";
-
-    document.getElementById("formCadastro").style.display = "none";
+    if (login) login.style.display = "flex";
+    if (cadastro) cadastro.style.display = "block";
+    if (formulario) formulario.style.display = "none";
 }
 
 
@@ -86,69 +94,110 @@ function voltarLogin(event) {
    CARRINHO DE COMPRAS
 ======================================== */
 
-// Recupera os produtos salvos no navegador
+// Recupera os produtos salvos
 
 let carrinho = [];
 
 try {
-    carrinho = JSON.parse(localStorage.getItem("carrinhoGiovana")) || [];
+
+    carrinho = JSON.parse(
+        localStorage.getItem("carrinhoGiovana")
+    ) || [];
+
 } catch (erro) {
+
     carrinho = [];
+
 }
 
-// Formatação dos valores em reais
+// Garante que produtos antigos tenham um ID
+
+carrinho.forEach(function(item) {
+
+    if (!item.id) {
+        item.id = item.nome;
+    }
+
+});
+
+
+/* ========================================
+   FORMATAÇÃO DE PREÇOS
+======================================== */
 
 function formatarPreco(valor) {
 
-    return valor.toLocaleString("pt-BR", {
+    return Number(valor).toLocaleString("pt-BR", {
         style: "currency",
         currency: "BRL"
     });
+
 }
 
-// Salva o carrinho no navegador
+
+/* ========================================
+   SALVAR CARRINHO
+======================================== */
 
 function salvarCarrinho() {
 
-    localStorage.setItem("carrinhoGiovana", JSON.stringify(carrinho));
+    localStorage.setItem(
+        "carrinhoGiovana",
+        JSON.stringify(carrinho)
+    );
+
 }
 
 
-// ABRIR CARRINHO
+/* ========================================
+   ABRIR E FECHAR CARRINHO ANTIGO
+======================================== */
 
 function abrirCarrinho(event) {
 
-    if (event) {
-        event.preventDefault();
-    }
+    if (event) event.preventDefault();
 
-    document.getElementById("modalCarrinho").style.display = "flex";
+    let modal = document.getElementById("modalCarrinho");
+
+    if (modal) {
+        modal.style.display = "flex";
+    }
 
     atualizarCarrinho();
 }
 
-
-// FECHAR CARRINHO
-
 function fecharCarrinho() {
 
-    document.getElementById("modalCarrinho").style.display = "none";
+    let modal = document.getElementById("modalCarrinho");
+
+    if (modal) {
+        modal.style.display = "none";
+    }
+
 }
 
 
-// ADICIONAR PRODUTO
+/* ========================================
+   ADICIONAR PRODUTO
+======================================== */
 
-function adicionarCarrinho(nome, preco) {
+function adicionarCarrinho(produto) {
 
-    preco = Number(String(preco).replace(",", "."));
+    let nome = produto.nome;
+    let preco = Number(produto.preco);
+    let id = produto.id;
 
-    if (!nome || !Number.isFinite(preco) || preco <= 0) {
+    if (!nome || !id || !Number.isFinite(preco) || preco <= 0) {
+
         alert("Produto ou preço inválido!");
+
         return;
     }
 
     let produtoExistente = carrinho.find(function(item) {
-        return item.nome === nome && item.preco === preco;
+
+        return item.id === id;
+
     });
 
     if (produtoExistente) {
@@ -158,9 +207,13 @@ function adicionarCarrinho(nome, preco) {
     } else {
 
         carrinho.push({
+
+            id: id,
             nome: nome,
             preco: preco,
+            imagem: produto.imagem || "",
             quantidade: 1
+
         });
 
     }
@@ -170,30 +223,48 @@ function adicionarCarrinho(nome, preco) {
     atualizarCarrinho();
 
     alert(nome + " foi adicionado ao carrinho!");
+
 }
 
 
-// ATUALIZAR CARRINHO
+/* ========================================
+   ATUALIZAR CARRINHO
+======================================== */
 
 function atualizarCarrinho() {
 
-    let lista = document.getElementById("listaCarrinho");
+    // Aceita o ID antigo e o novo
+
+    let lista =
+        document.getElementById("lista-carrinho") ||
+        document.getElementById("listaCarrinho");
 
     let subtotalElemento = document.getElementById("subtotal");
-
     let totalElemento = document.getElementById("total");
-
-    lista.innerHTML = "";
 
     let subtotal = 0;
 
+    // Se a página não tiver a lista, não continua
+
+    if (!lista) return;
+
+    lista.innerHTML = "";
+
+    // Verifica se está vazio
+
     if (carrinho.length === 0) {
 
-        lista.innerHTML = '<p class="carrinho-vazio">Seu carrinho está vazio.</p>';
+        lista.innerHTML = `
+            <p class="carrinho-vazio">
+                Seu carrinho está vazio.
+            </p>
+        `;
 
     }
 
-    carrinho.forEach(function(item, indice) {
+    // Percorre os produtos
+
+    carrinho.forEach(function(item) {
 
         let valorProduto = item.preco * item.quantidade;
 
@@ -203,16 +274,30 @@ function atualizarCarrinho() {
 
         produto.className = "item-carrinho";
 
+        let imagem = item.imagem
+            ? `<img src="${item.imagem}" alt="${item.nome}" class="imagem-produto-carrinho">`
+            : "";
+
         produto.innerHTML = `
+
+            ${imagem}
+
             <div class="info-produto-carrinho">
 
-                <span class="produto-carrinho">${item.nome}</span>
+                <h3>${item.nome}</h3>
 
-                <span class="preco-produto-carrinho">
-                    ${formatarPreco(valorProduto)}
+                <span>
+                    ${formatarPreco(item.preco)}
                 </span>
 
-                <button class="remover-produto" onclick="removerProduto(${indice})">
+                <p>
+                    Total: ${formatarPreco(valorProduto)}
+                </p>
+
+                <button
+                    class="remover-produto"
+                    data-acao="remover"
+                    data-id="${item.id}">
                     Remover
                 </button>
 
@@ -220,53 +305,150 @@ function atualizarCarrinho() {
 
             <div class="controles-quantidade">
 
-                <button onclick="alterarQuantidade(${indice}, -1)">−</button>
+                <button
+                    data-acao="diminuir"
+                    data-id="${item.id}">
+                    −
+                </button>
 
                 <span>${item.quantidade}</span>
 
-                <button onclick="alterarQuantidade(${indice}, 1)">+</button>
+                <button
+                    data-acao="aumentar"
+                    data-id="${item.id}">
+                    +
+                </button>
 
             </div>
+
         `;
 
         lista.appendChild(produto);
 
     });
 
-    subtotalElemento.textContent = formatarPreco(subtotal);
+    // Atualiza os valores
 
-    totalElemento.textContent = formatarPreco(subtotal);
+    if (subtotalElemento) {
+        subtotalElemento.textContent = formatarPreco(subtotal);
+    }
+
+    if (totalElemento) {
+        totalElemento.textContent = formatarPreco(subtotal);
+    }
+
 }
 
 
-// AUMENTAR OU DIMINUIR QUANTIDADE
+/* ========================================
+   ALTERAR QUANTIDADE
+======================================== */
 
-function alterarQuantidade(indice, quantidade) {
+function alterarQuantidade(id, quantidade) {
 
-    carrinho[indice].quantidade += quantidade;
+    let produto = carrinho.find(function(item) {
+        return item.id === id;
+    });
 
-    if (carrinho[indice].quantidade <= 0) {
+    if (!produto) return;
 
-        carrinho.splice(indice, 1);
+    produto.quantidade += quantidade;
+
+    if (produto.quantidade <= 0) {
+
+        removerProduto(id);
+
+        return;
 
     }
 
     salvarCarrinho();
 
     atualizarCarrinho();
+
 }
 
 
-// REMOVER PRODUTO
+/* ========================================
+   REMOVER PRODUTO
+======================================== */
 
-function removerProduto(indice) {
+function removerProduto(id) {
 
-    carrinho.splice(indice, 1);
+    carrinho = carrinho.filter(function(item) {
+        return item.id !== id;
+    });
 
     salvarCarrinho();
 
     atualizarCarrinho();
+
 }
+
+
+/* ========================================
+   BOTÕES DO CARRINHO
+======================================== */
+
+document.addEventListener("click", function(event) {
+
+    let botao = event.target.closest("[data-acao]");
+
+    if (!botao) return;
+
+    let id = botao.dataset.id;
+    let acao = botao.dataset.acao;
+
+    if (acao === "aumentar") {
+        alterarQuantidade(id, 1);
+    }
+
+    if (acao === "diminuir") {
+        alterarQuantidade(id, -1);
+    }
+
+    if (acao === "remover") {
+        removerProduto(id);
+    }
+
+});
+
+
+/* ========================================
+   BOTÕES DE ADICIONAR PRODUTOS
+======================================== */
+
+document.addEventListener("click", function(event) {
+
+    let botao = event.target.closest(
+        "[data-adicionar], .adicionar-carrinho"
+    );
+
+    if (!botao) return;
+
+    let nome = botao.dataset.nome;
+    let preco = Number(
+        String(botao.dataset.preco).replace(",", ".")
+    );
+
+    let imagemElemento = botao.closest(".produto")?.querySelector("img");
+
+    let imagem = imagemElemento
+        ? imagemElemento.src
+        : "";
+
+    let produto = {
+
+        id: botao.dataset.id,
+        nome: nome,
+        preco: preco,
+        imagem: imagem
+
+    };
+
+    adicionarCarrinho(produto);
+
+});
 
 
 /* ========================================
@@ -282,7 +464,8 @@ function finalizarPedido() {
         return;
     }
 
-    let mensagem = "Olá! Gostaria de fazer um pedido na Doces da Giovana:\n\n";
+    let mensagem =
+        "Olá! Gostaria de fazer um pedido na Doces da Giovanna:\n\n";
 
     let total = 0;
 
@@ -301,11 +484,10 @@ function finalizarPedido() {
 
     mensagem += "\nTotal do pedido: " + formatarPreco(total);
 
-    // Copia o pedido para facilitar o envio pelo WhatsApp
-
     if (navigator.clipboard && navigator.clipboard.writeText) {
 
         navigator.clipboard.writeText(mensagem)
+
             .then(function() {
 
                 window.open(
@@ -313,52 +495,42 @@ function finalizarPedido() {
                     "_blank"
                 );
 
-                alert("Pedido copiado! Agora é só colar a mensagem na conversa do WhatsApp.");
+                alert(
+                    "Pedido copiado! Agora é só colar a mensagem na conversa do WhatsApp."
+                );
 
             })
+
             .catch(function() {
 
-                alert("Não foi possível copiar automaticamente. Tente novamente.");
+                alert("Não foi possível copiar o pedido.");
 
             });
 
     } else {
 
-        alert("Seu navegador não permite copiar automaticamente. Utilize outro navegador para finalizar o pedido.");
+        alert("Seu navegador não permite copiar automaticamente.");
 
     }
 
 }
 
 
-/* ========================================
-   BOTÕES DE ADICIONAR PRODUTOS
-======================================== */
+// Configura o botão de finalizar
 
-// Identifica os botões de adicionar ao carrinho
+let botoesFinalizar = document.querySelectorAll(
+    "#finalizar-pedido, .finalizar-pedido"
+);
 
-document.addEventListener("click", function(event) {
+botoesFinalizar.forEach(function(botao) {
 
-    let botao = event.target.closest(".adicionar-carrinho");
-
-    if (!botao) {
-        return;
-    }
-
-    let nome = botao.dataset.nome;
-
-    let preco = botao.dataset.preco;
-
-    adicionarCarrinho(nome, preco);
+    botao.addEventListener("click", finalizarPedido);
 
 });
 
 
-// Atualiza o carrinho ao abrir a página
+/* ========================================
+   INICIALIZAÇÃO
+======================================== */
 
 atualizarCarrinho();
-
-
-// Botão de finalizar pedido
-
-document.querySelector(".finalizar-pedido").addEventListener("click", finalizarPedido);

@@ -1,0 +1,82 @@
+
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Carrinho | Doces da Giovanna</title>
+
+    <link rel="shortcut icon" href="../imagens/logo.jpeg" type="image/x-icon">
+
+    <link rel="stylesheet" href="carrinho.css">
+
+</head>
+
+<body>
+
+    <!-- Cabeçalho -->
+    <header class="cabecalho">
+
+        <h1>Doces da Giovanna</h1>
+
+        <nav>
+            <a href="../index.html">Início</a>
+            <a href="../index.html#doces">Nossos Doces</a>
+        </nav>
+
+    </header>
+
+
+    <!-- Conteúdo principal -->
+    <main class="pagina-carrinho">
+
+        <h2>Meu Carrinho</h2>
+
+        <p class="descricao">
+            Confira os docinhos que você escolheu!
+        </p>
+
+
+        <!-- Produtos do carrinho -->
+        <section class="lista-carrinho" id="lista-carrinho">
+
+            <p class="carrinho-vazio">
+                Seu carrinho está vazio.
+            </p>
+
+        </section>
+
+
+        <!-- Resumo da compra -->
+        <section class="resumo-carrinho">
+
+            <h3>Resumo do pedido</h3>
+
+            <div class="linha-resumo">
+                <span>Subtotal:</span>
+                <span id="subtotal">R$ 0,00</span>
+            </div>
+
+            <div class="linha-resumo total">
+                <span>Total:</span>
+                <span id="total">R$ 0,00</span>
+            </div>
+
+            <button id="finalizar-pedido">
+                Finalizar pedido
+            </button>
+
+            <a href="../index.html" class="continuar-comprando">
+                Continuar comprando
+            </a>
+
+        </section>
+
+    </main>
+
+    <script src="../script.js"></script>
+
+</body>
+</html>
