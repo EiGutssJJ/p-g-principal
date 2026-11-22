@@ -1,0 +1,117 @@
+
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Brownies | Doces da Giovanna</title>
+
+    <link rel="stylesheet" href="brownie.css">
+</head>
+
+<body>
+
+    <!-- Cabeçalho -->
+    <header class="cabecalho">
+
+        <h1>Doces da Giovanna</h1>
+
+        <nav>
+            <a href="../index.html">Início</a>
+            <a href="../brigadeiros/imagens/brigadeiros.html">Brigadeiros</a>
+            <a href="../morangos/morangos.html">Morangos</a>
+            <a href="../bolos/imagens/bolos.html">Bolos</a>
+        </nav>
+
+        <a href="../carrinho/carrinho.html" class="carrinho">
+            🛒 Meu carrinho
+        </a>
+
+    </header>
+
+    <!-- Produtos -->
+    <main>
+
+        <section class="titulo-pagina">
+
+            <h2>Nossos Brownies</h2>
+
+            <p>
+                Brownies preparados com carinho para adoçar momentos especiais!
+            </p>
+
+        </section>
+
+        <!-- Lista de produtos -->
+        <section class="produtos">
+
+            <!-- Produto 1 -->
+            <div class="produto">
+
+                <img
+                    src="imagens/brownie.jpeg"
+                    alt="Copo Brownie com geleia de morango">
+
+                <h3>Copo Brownie</h3>
+
+                <p>
+                    Copo Brownie com geleia de morango.
+                </p>
+
+                <span>R$ 20,00</span>
+
+                <button
+                    class="adicionar-carrinho"
+                    data-adicionar
+                    data-id="copo-brownie"
+                    data-nome="Copo Brownie"
+                    data-preco="20.00"
+                    data-imagem="imagens/brownie.jpeg">
+
+                    Adicionar ao carrinho
+
+                </button>
+
+            </div>
+
+            <!-- Produto 2 -->
+            <div class="produto">
+
+                <img
+                    src="imagens/copo brownie brigadeiro de ninho, geleia de morango, brownie e chanti.jpeg"
+                    alt="Copo Brownie com brigadeiro de ninho">
+
+                <h3>Copo Brownie Brigadeiro de Ninho</h3>
+
+                <p>
+                    Copo brownie com brigadeiro de ninho, geleia de morango,
+                    brownie e chantilly.
+                </p>
+
+                <span>R$ 20,00</span>
+
+                <button
+                    class="adicionar-carrinho"
+                    data-adicionar
+                    data-id="ninho-brownie"
+                    data-nome="Copo Brownie Brigadeiro de Ninho"
+                    data-preco="20.00"
+                    data-imagem="imagens/copo brownie brigadeiro de ninho, geleia de morango, brownie e chanti.jpeg">
+
+                    Adicionar ao carrinho
+
+                </button>
+
+            </div>
+
+        </section>
+
+    </main>
+
+    <!-- JavaScript -->
+    <script src="../script.js"></script>
+
+</body>
+</html>

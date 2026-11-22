@@ -1,0 +1,164 @@
+
+@charset "UTF-8";
+
+/* Cores do projeto */
+/* #F2E9E9 #8C4D4D #ffb8ad83 #C45D70 */
+
+/* Configurações gerais */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Corpo da página */
+body {
+    background-color: #F2E9E9;
+    font-family: Arial, sans-serif;
+    color: #8C4D4D;
+}
+
+/* Cabeçalho */
+.cabecalho {
+    background-color: #ffb8ad83;
+    padding: 25px;
+    text-align: center;
+}
+
+.cabecalho h1 {
+    margin-bottom: 20px;
+}
+
+/* Menu de navegação */
+nav {
+    display: flex;
+    justify-content: center;
+    gap: 25px;
+    flex-wrap: wrap;
+}
+
+nav a {
+    color: #8C4D4D;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+nav a:hover {
+    color: #C45D70;
+}
+
+/* Link do carrinho */
+a.carrinho {
+    display: inline-block;
+    margin-top: 20px;
+    text-decoration: none;
+    color: #8C4D4D;
+    font-weight: bold;
+}
+
+/* Título da página */
+.titulo-pagina {
+    text-align: center;
+    padding: 50px 20px;
+}
+
+.titulo-pagina h2 {
+    font-size: 32px;
+    margin-bottom: 15px;
+}
+
+.titulo-pagina p {
+    font-size: 17px;
+}
+
+/* Cartão do produto */
+.produto {
+    background-color: white;
+    padding: 20px;
+    border-radius: 15px;
+    width: 100%;
+    max-width: 280px;
+    min-height: 420px;
+    margin: 0 auto 30px;
+    text-align: center;
+}
+
+/* Organização dos produtos */
+.produtos {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 280px));
+    justify-content: center;
+    gap: 25px;
+    padding: 30px;
+    max-width: 1200px;
+    margin: auto;
+}
+
+/* Imagem do produto */
+.produto img {
+    width: 100%;
+    height: 260px;
+    object-fit: cover;
+    object-position: center;
+    border-radius: 10px;
+    margin-bottom: 15px;
+}
+
+/* Nome do produto */
+.produto h3 {
+    margin-bottom: 10px;
+    font-size: 20px;
+}
+
+/* Descrição */
+.produto p {
+    font-size: 15px;
+    margin-bottom: 10px;
+    line-height: 1.4;
+}
+
+/* Preço */
+.produto span {
+    display: block;
+    font-size: 18px;
+    font-weight: bold;
+    color: #C45D70;
+    margin-top: 10px;
+    margin-bottom: 15px;
+}
+
+/* Botão do carrinho */
+.produto button {
+    background-color: #C45D70;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.produto button:hover {
+    background-color: #8C4D4D;
+}
+
+/* Adaptação para celulares */
+@media (max-width: 600px) {
+
+    .cabecalho {
+        padding: 20px 10px;
+    }
+
+    .titulo-pagina {
+        padding: 35px 15px;
+    }
+
+    .titulo-pagina h2 {
+        font-size: 26px;
+    }
+
+    .produto {
+        max-width: 90%;
+    }
+
+}

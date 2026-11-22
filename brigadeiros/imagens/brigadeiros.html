@@ -1,11 +1,87 @@
+
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Brigadeiros | Doces da Giovana</title>
+
+    <title>Brigadeiros | Doces da Giovanna</title>
+
+    <link rel="stylesheet" href="brigadeiros.css">
 </head>
+
 <body>
-    
+
+    <!-- Cabeçalho -->
+    <header class="cabecalho">
+
+        <h1>Doces da Giovanna</h1>
+
+        <nav>
+            <a href="../../index.html">Início</a>
+            <a href="../../morangos/morangos.html">Morangos</a>
+            <a href="../../brownies/brownie.html">Brownies</a>
+            <a href="../../bolos/imagens/bolos.html">Bolos</a>
+        </nav>
+
+        <a href="../../carrinho/carrinho.html" class="carrinho">
+            🛒 Meu carrinho
+        </a>
+
+    </header>
+
+    <!-- Produtos -->
+    <main>
+
+        <section class="titulo-pagina">
+
+            <h2>Nossos Brigadeiros</h2>
+
+            <p>
+                Brigadeiros preparados com carinho para adoçar momentos especiais!
+            </p>
+
+        </section>
+
+        <!-- Lista de produtos -->
+        <section class="produtos">
+
+            <!-- Produto 1 -->
+            <div class="produto">
+
+                <img
+                    src="brigadeiros.jpeg"
+                    alt="Brigadeiros">
+
+                <h3>Brigadeiro</h3>
+
+                <p>
+                    Brigadeiros preparados com carinho para adoçar seu dia.
+                </p>
+
+                <span>R$ 20,00</span>
+
+                <button
+                    class="adicionar-carrinho"
+                    data-adicionar
+                    data-id="brigadeiro-tradicional"
+                    data-nome="Brigadeiro"
+                    data-preco="20.00"
+                    data-imagem="imagens/brigadeiros.jpeg">
+
+                    Adicionar ao carrinho
+
+                </button>
+
+            </div>
+
+        </section>
+
+    </main>
+
+    <!-- JavaScript -->
+    <script src="../../script.js"></script>
+
 </body>
 </html>
